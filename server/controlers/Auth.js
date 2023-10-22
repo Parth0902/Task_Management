@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
-
+require('dotenv').config();
 // hashing the password using bcrypt
 const hashPass=async(pass)=>
 {
@@ -63,10 +63,10 @@ const login= async(req,res)=>{
             const privateKeyPath = path.join('./', 'keys', 'private_key.pem');
            
 
-            const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+            const privateKey = process.env.private_key
             const payload = {user:user.Name,email:user.Email,access:user.Access};
-
-            const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
+            
+            const token = jwt.sign(payload,privateKey, { algorithm: 'RS256' });
 
             console.log(token);
 
