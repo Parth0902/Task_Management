@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily:{
-      logo:["Pacifico","cursive"]
+      logo:["Saira","sans-serif"],
+      heading:["Roboto","sans-serif"],
+      subheading:["Poppins","sans-serif"]
     }
   },
   plugins: [],

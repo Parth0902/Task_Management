@@ -21,10 +21,10 @@ const register=async (req,res)=>
     if(name!=="" && password!=="" && access!==""){
 
         // check if the user already exists or not
-       const U= await db.collection('User').findOne({Email:email});
+       const U= await db.collection('User').findOne({Email:email,Access:access});
        if(U){
-          res.json('User Already exists');
-
+          
+          res.json('User with same email Already exists');
        }
        else{
 
