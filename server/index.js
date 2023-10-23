@@ -1,16 +1,16 @@
 const express= require('express')
 const cors= require('cors')
 const App= express();
-const db= require('./db.js');
-const Key_Gen= require('./key.js');
 const Auth= require('./routes/Auth.js');
+require("dotenv").config();
+const port= process.env.PORT;
 
 App.use(express.json());
 App.use(cors());
 
 App.use('/Auth',Auth);
 
-App.listen(5500,()=>
+App.listen(port,()=>
 {
-    console.log("Server is listining on port: 5500");
+    console.log("Server is listining");
 })
