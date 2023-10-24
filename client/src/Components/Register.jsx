@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+
 import axios from 'axios';
 
 const Register = () => {
@@ -23,15 +24,23 @@ const Register = () => {
                 errMsg+="email is empty !\n"
                 setErr(true);
             }
+            if(!data.email.includes('@')){
+              errMsg+="Envalid email format must include @ \n"
+              setErr(true);
+            }
             if(data.password===''){
                 errMsg+="password is empty !\n"
                 setErr(true);
             }
             if(data.password!== Cpass){
-                errMsg+="Password and confirm Password dont Match";
+                errMsg+="Password and confirm Password dont Match \n";
                 setErr(true);
             }
-            
+            if(data.access===''){
+              errMsg+="Role is not selected\n";
+              setErr(true);
+            }
+
             if(err){
               alert(errMsg);
             }
@@ -58,44 +67,44 @@ const Register = () => {
         <h1 className="text-center text-5xl font-heading font-bold">Welcome</h1>
         <div className=" flex flex-col gap-3 px-20 py-10 border border-gray-600 rounded-lg">
           {/* <label htmlFor=""> Enter Name:</label> */}
-          <label htmlFor="">Enter Name</label>
+          <label htmlFor="" className="font-subheading font-medium">Enter Name</label>
           <input
             type="text"
             className="border border-gray-300 text-lg text-gray-600 py-1 px-3"
             onChange={e=>setData(prevState=>({...prevState,name:e.target.value}))}
           />
 
-          <label htmlFor="">Enter email</label>
+          <label htmlFor="" className="font-subheading font-medium">Enter email</label>
           <input
             type="text"
             className="border border-gray-300 text-lg text-gray-600 py-1 px-3"
             onChange={e=>setData(prevState=>({...prevState,email:e.target.value}))}
           />
 
-          <label htmlFor="">Enter Password</label>
+          <label htmlFor="" className="font-subheading font-medium">Enter Password</label>
           <input
             type="password"
             className="border border-gray-300 text-lg  text-gray-600 py-1 px-3"
             onChange={e=>setData(prevState=>({...prevState,password:e.target.value}))}
           />
 
-          <label htmlFor="">Confirm Password</label>
+          <label htmlFor="" className="font-subheading font-medium">Confirm Password</label>
           <input
             type="password"
             className="border border-gray-300 text-lg  text-gray-600 py-1 px-3"
             onChange={e=>setCpass(e.target.value)}
           />
 
+          <label htmlFor="" className="font-subheading font-medium">Select Role</label>
           <div>
-          
-            <label className="flex flex-row gap-3">
+            <label className="flex flex-row gap-3 ">
               <input
                 type="radio"
                 name="role"
                 value="manager"
                 onChange={e=>setData(prevState=>({...prevState,access:e.target.value}))}
               />
-              Login as Manager
+              Register as Manager
             </label>
         
           
@@ -106,7 +115,7 @@ const Register = () => {
                 value="employee"
                 onChange={e=>setData(prevState=>({...prevState,access:e.target.value}))}
               />
-              Login as Employee
+              Register as Employee
             </label>
         
           </div>

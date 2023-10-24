@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
+
 require('dotenv').config();
 // hashing the password using bcrypt
 const hashPass=async(pass)=>
@@ -58,38 +59,33 @@ const login= async(req,res)=>{
         const user= await db.collection('User').findOne({Email:email});
 
         if(user){
-
-            const OgPassword= user.Password;
             const privateKeyPath = path.join('./', 'keys', 'private_key.pem');
-           
-
-            const privateKey = process.env.private_key
+            const OgPassword= user.Password;
+            const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
             const payload = {user:user.Name,email:user.Email,access:user.Access};
             
             const token = jwt.sign(payload,privateKey, { algorithm: 'RS256' });
-
-            console.log(token);
 
             bcrypt.compare(password,OgPassword,(err,result)=>
             {
                 if(err) throw err;
                 if(result===true){
-                   res.json({msg:'Login Successfull',toekn:token});
+                   res.json({msg:'Login Successfull',token:token});
                 }
                 else{
-                    res.json('UserName or password is incorrect');
+                    res.json({msg:'UserName or password is incorrect'});
                 }
 
             })
         }
         else{
-            res.json('User is not regiterd');
+            res.json({msg:'User is not regiterd'});
         }
      
 
     }
     else{
-        res.json('Blank fields');
+        res.json({msg:'Blank fields'});
     }
 
 }
