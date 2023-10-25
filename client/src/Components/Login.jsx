@@ -15,7 +15,7 @@ const Login = () => {
   let navigate= useNavigate();
   const HandleSubmit=async()=>
   {
-    console.log(data);
+    
     let errMsg="ERROR !\n";
  
     if(data.email===''){
@@ -36,6 +36,7 @@ const Login = () => {
         if(reply.data.msg==='Login Successfull'){
           console.log(reply.data.token);
            sessionStorage.setItem("token",reply.data.token);
+           sessionStorage.setItem("user",JSON.stringify(reply.data.user));
            alert("Login Successfull");
            navigate('/')
            
@@ -58,10 +59,10 @@ const Login = () => {
             <h1 className='text-center text-5xl font-heading font-bold'>Welcome</h1>
             <div className=' flex flex-col gap-3 px-20 py-10 border border-gray-600 rounded-lg'>
               {/* <label htmlFor=""> Enter Name:</label> */}
-              <label htmlFor="">Enter email</label>
+              <label htmlFor="" className="font-subheading font-medium">Enter email</label>
               <input type="text"  className='border border-gray-300 text-lg text-gray-600 py-1 px-3' onChange={e=>setData(prevState=>({...prevState,email:e.target.value}))}/>
 
-              <label htmlFor="">Enter Password</label>
+              <label htmlFor="" className="font-subheading font-medium">Enter Password</label>
               <input type="password" className='border border-gray-300 text-lg  text-gray-600 py-1 px-3'  onChange={e=>setData(prevState=>({...prevState,password:e.target.value}))}/>
               
               <div className='flex justify-center pt-5'>

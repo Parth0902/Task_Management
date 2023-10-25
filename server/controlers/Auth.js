@@ -62,6 +62,7 @@ const login= async(req,res)=>{
             const privateKeyPath = path.join('./', 'keys', 'private_key.pem');
             const OgPassword= user.Password;
             const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+            
             const payload = {user:user.Name,email:user.Email,access:user.Access};
             
             const token = jwt.sign(payload,privateKey, { algorithm: 'RS256' });
@@ -70,7 +71,7 @@ const login= async(req,res)=>{
             {
                 if(err) throw err;
                 if(result===true){
-                   res.json({msg:'Login Successfull',token:token});
+                   res.json({msg:'Login Successfull',token:token,user:{name:user.Name,email:user.Email,access:user.Access}});
                 }
                 else{
                     res.json({msg:'UserName or password is incorrect'});
