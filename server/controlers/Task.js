@@ -31,7 +31,8 @@ const CreateTask=async (req,res)=>
             TaskName:taskName,
             Discription:discription,
             AssignedTo:assignedTo,
-            AssignedBy:assignedBy
+            AssignedBy:assignedBy,
+            Status:"incomplete"
         }
 
         try{
