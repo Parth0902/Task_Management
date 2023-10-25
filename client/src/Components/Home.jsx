@@ -9,6 +9,7 @@ const Home = () => {
 
   const [currUser,setCurrUser]=useState(JSON.parse(sessionStorage.getItem("user") || null));
   const [openTask,setOpentask]=useState(false);
+  const [openAssignTask,setopenAssignTask]=useState(false);
 
     const OpenCreateTask=()=>
     {
@@ -20,10 +21,24 @@ const Home = () => {
         setOpentask(false);
     }
 
+    const StartAssignTask=()=>{
+      console.log('start')
+      setopenAssignTask(true);
+    }
+
+    const ColseAssignTask=()=>{
+      console.log('close');
+      setopenAssignTask(false);
+    }
+
+
   
   return (
     <div className='h-screen overflow-hidden'>
-      <AssignTask/>
+      {
+        openAssignTask &&
+        <AssignTask ColseAssignTask={ColseAssignTask}/>
+      }
       <div className=' py-8 shadow-md  flex flex-row items-center'>
         <div className='flex-1 '> <h1 className='text-2xl font-bold font-logo text-center'>Task Manager</h1></div>
          
@@ -45,8 +60,7 @@ const Home = () => {
       
       {
         openTask &&
-           
-        <CreateTask CloseCreateTask={CloseCreateTask} />
+        <CreateTask CloseCreateTask={CloseCreateTask} StartAssignTask={StartAssignTask} />
       }
 
     

@@ -4,7 +4,7 @@ import axios from 'axios';
 import EmpCard from './EmpCard';
 import { X } from 'lucide-react';
 
-const AssignTask = () => {
+const AssignTask = ({ColseAssignTask}) => {
    const [employee,setEmployee]=useState([]);
    const [selected,SetSelected]=useState([]);
 
@@ -32,8 +32,8 @@ const AssignTask = () => {
 
     },[]);
   return (
-    <div className='bg-white border border-black' style={{ position: "absolute", top: "55%",left: "50%",transform: "translate(-50%, -50%)"}}>
-      <div className='flex felx-row justify-end'><X className=' cursor-pointer '/></div>
+    <div className='bg-white border border-black z-20' style={{ position: "absolute", top: "55%",left: "50% ",transform: "translate(-50%, -50%)"}}>
+      <div className='flex felx-row justify-end'><X className=' cursor-pointer ' onClick={ColseAssignTask}/></div>
       
           <div className='flex flex-col gap-5 flex-1  ustify-center items-center p-10 overflow-auto'>
             <h1 className='font-logo font-bold text-lg text-center'>All employees</h1>
