@@ -3,18 +3,16 @@ const db= require('../db.js').collection('Tasks');
 
 const getAllTasks=async(req,res)=>
 {
-  const user= req.body.params;
-
+  const user= req.params.user;
+  console.log(user);
   try{
-
-    const reply= await db.find({})
-
+    const reply= await db.find({AssignedTo:user}).toArray();
+    console.log(reply);
+    res.json(reply);
   }
   catch(err){
     console.log(err);
-
   }
-
 }
 
 const CreateTask=async (req,res)=>
@@ -47,4 +45,4 @@ const CreateTask=async (req,res)=>
 
 }
 
-module.exports={CreateTask};
+module.exports={CreateTask,getAllTasks};
