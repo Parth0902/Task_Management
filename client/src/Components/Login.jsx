@@ -38,7 +38,7 @@ const Login = () => {
            sessionStorage.setItem("token",reply.data.token);
            sessionStorage.setItem("user",JSON.stringify(reply.data.user));
            alert("Login Successfull");
-           navigate('/')
+           navigate('/Home')
            
         }
         else{

@@ -44,8 +44,8 @@ const CreateTask = ({CloseCreateTask}) => {
       }
       else{
         try{
-          const reply= await axios.post('http://localhost:5700/Task/CreateTask',task);
-          alert(reply.data);
+          const reply= await axios.post('http://localhost:5700/Task/CreateTask',task,{headers: {Authorization: sessionStorage.getItem("token")}});
+          alert(reply);
         }
         catch(err){
           

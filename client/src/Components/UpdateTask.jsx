@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { X } from 'lucide-react';
+import { CopySlash, X } from 'lucide-react';
 import axios from 'axios';
 
 const CreateTask = ({closeOpenUpdate,Utask}) => {
@@ -15,13 +15,12 @@ const CreateTask = ({closeOpenUpdate,Utask}) => {
       assignedTo:Utask.AssignedTo,
       assignedBy:Utask.AssignedBy
     });
-    const [err,setErr]=useState(false);
   
     const AddTask=async()=>
     {
         try{
-            axios.post()
-
+            const reply= await axios.post('http://localhost:5700/Task/EditTask',task,{headers: {Authorization: sessionStorage.getItem("token")}});
+            alert(reply.data);
         }
         catch(err){
             console.log(err);
@@ -41,25 +40,25 @@ const CreateTask = ({closeOpenUpdate,Utask}) => {
             <h4 className='font-heading text-center font-bold text-xl'>Update Task</h4>
             <div className='flex flex-col gap-2'>
                  <label htmlFor="" className="font-subheading font-medium">Enter start date</label>
-                 <input type="date" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={Utask.StartDate} onChange={e=>SetTask(prevState=>({...prevState,startDate:e.target.value}))} />
+                 <input type="date" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={task.startDate} onChange={e=>SetTask({...task,startDate:e.target.value})} />
             </div>
 
             <div className='flex flex-col gap-2'>
                 <label className="font-subheading font-medium">Enter Due date</label>
-                <input type="date" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={Utask.DueDate} onChange={e=>SetTask(prevState=>({...prevState,dueDate:e.target.value}))}/>
+                <input type="date" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={task.dueDate} onChange={e=>SetTask({...task,dueDate:e.target.value})}/>
             </div>
 
             <div className='flex flex-col gap-2'>
                 <label htmlFor="" className="font-subheading font-medium">Enter Task Name</label>
-                <input type="text" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={Utask.TaskName} onChange={e=>SetTask(prevState=>({...prevState,taskName:e.target.value}))}/>
+                <input type="text" className='border border-gray-300 text-lg text-gray-600 py-1 px-3'  value={task.taskName} onChange={e=>SetTask(prevState=>({...prevState,taskName:e.target.value}))}/>
             </div>
 
             <div className='flex flex-col gap-2'>
                 <label htmlFor="" className="font-subheading font-medium">Enter Discription</label>
-                <textarea name="" id="" cols="30" rows="5" className='border border-gray-300 text-lg  text-gray-600 py-1 px-3' value={Utask.Discription}  onChange={e=>SetTask(prevState=>({...prevState,discription:e.target.value}))}></textarea>
+                <textarea name="" id="" cols="30" rows="5" className='border border-gray-300 text-lg  text-gray-600 py-1 px-3' value={task.discription}  onChange={e=>SetTask(prevState=>({...prevState,discription:e.target.value}))}></textarea>
             </div>
             <div className='flex flex-col gap-2'>
-             <label htmlFor="" className="font-subheading font-medium">Assigned to: <span className='text-lg text-gray-600'>{Utask.AssignedTo}</span></label>
+             <label htmlFor="" className="font-subheading font-medium">Assigned to: <span className='text-lg text-gray-600'>{task.assignedTo}</span></label>
 
             </div>
 

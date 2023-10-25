@@ -6,10 +6,10 @@ const db= require('../db.js').collection('Tasks');
 const getAllTasks=async(req,res)=>
 {
   const user= req.params.user;
-  console.log(user);
+ 
   try{
     const reply= await db.find({AssignedTo:user}).toArray();
-    console.log(reply);
+   
     res.json(reply);
   }
   catch(err){

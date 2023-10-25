@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { X } from 'lucide-react';
 import UpdateTask from './UpdateTask.jsx';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Task from './Task';
 const CardsGrid = () => {
@@ -8,7 +9,7 @@ const CardsGrid = () => {
     const [tasks,SetTasks]=useState([]);
     const [openUpdate,setOpenUpdate]=useState(false);
     const [Utask,setUtask]=useState({});
-    
+    let navigate= useNavigate();
 
     const StartOpenUpdate=(data)=>{
         setUtask(data)
@@ -23,7 +24,7 @@ const CardsGrid = () => {
     { 
         if(currUser){
             try{
-                 const reply= await axios.get(`http://localhost:5700/Task/AllTasks/${currUser.email}`);
+                 const reply= await axios.get(`http://localhost:5700/Task/AllTasks/${currUser.email}`,{headers: {Authorization: sessionStorage.getItem("token")}});
                  SetTasks(reply.data);
                  console.log(tasks);
             }
@@ -32,7 +33,7 @@ const CardsGrid = () => {
             }
         }
         else{
-            alert('Toekn not found login again')
+           
         }
       
     }
