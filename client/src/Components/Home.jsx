@@ -3,6 +3,7 @@ import SideBar from './SideNav.jsx'
 import CardsGrid from './CardsGrid';
 import { UserCircle2 } from 'lucide-react';
 import CreateTask from './CreateTask';
+import AssignTask from './AssignTask.jsx';
 
 const Home = () => {
 
@@ -22,6 +23,7 @@ const Home = () => {
   
   return (
     <div className='h-screen overflow-hidden'>
+      <AssignTask/>
       <div className=' py-8 shadow-md  flex flex-row items-center'>
         <div className='flex-1 '> <h1 className='text-2xl font-bold font-logo text-center'>Task Manager</h1></div>
          
@@ -46,6 +48,8 @@ const Home = () => {
            
         <CreateTask CloseCreateTask={CloseCreateTask} />
       }
+
+    
 
 
     </div>

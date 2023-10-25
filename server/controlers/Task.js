@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 
 const router =require('express').Router();
 const db= require('../db.js').collection('Tasks');
+const db1= require('../db.js').collection('User');
 
 const getAllTasks=async(req,res)=>
 {
@@ -79,4 +80,19 @@ const EditTask = async(req, res) => {
     }
 }
 
-module.exports={CreateTask,getAllTasks, EditTask};
+const getAllEmployees=async(req,res)=>{
+
+    try{
+        const reply= await db1.find({Access:'emp'}).toArray();
+        res.json(reply);
+      }
+      catch(err){
+        console.log(err);
+      }
+
+}
+const deletTask =async(req,res)=>{
+
+}
+
+module.exports={CreateTask,getAllTasks, EditTask, getAllEmployees};
