@@ -2,9 +2,23 @@ import React, { useState } from 'react'
 import SideBar from './SideNav.jsx'
 import CardsGrid from './CardsGrid';
 import { UserCircle2 } from 'lucide-react';
+import CreateTask from './CreateTask';
+
 const Home = () => {
 
   const [currUser,setCurrUser]=useState(JSON.parse(sessionStorage.getItem("user") || null));
+  const [openTask,setOpentask]=useState(false);
+
+    const OpenCreateTask=()=>
+    {
+        setOpentask(true);
+    }
+
+    const CloseCreateTask=()=>
+    {
+        setOpentask(false);
+    }
+
   
   return (
     <div className='h-screen overflow-hidden'>
@@ -23,10 +37,15 @@ const Home = () => {
       </div>
 
       <div className='flex flex-row'>
-        <SideBar/>
+        <SideBar OpenCreateTask={OpenCreateTask}/>
         <CardsGrid/>
       </div>
-        
+      
+      {
+        openTask &&
+           
+        <CreateTask CloseCreateTask={CloseCreateTask} />
+      }
 
 
     </div>

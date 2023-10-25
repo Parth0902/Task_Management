@@ -1,10 +1,8 @@
 import React from 'react'
 // import { X } from 'lucide-react';
-const SideNav = ({setOpenTask}) => {
+const SideNav = ({OpenCreateTask}) => {
 
-   const OpenCreateTask=()=>{
-       setOpenTask(true);
-   }
+   
 
   return (
     <div className='flex flex-col items-center gap-16  border pt-16 px-16 border-r-gray-300 '>

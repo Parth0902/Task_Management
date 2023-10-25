@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react';
-import CreateTask from './CreateTask';
-const CardsGrid = () => {
-    const [openTask,setOpentask]=useState(false);
 
+const CardsGrid = () => {
+    
   return (
     <div className=' flex-auto gap-10 h-screen overflow-auto pt-10 pb-28'>
        
-        <CreateTask />
+    
          <div className='flex flex-wrap gap-10 justify-center pb-10'>
                 <div className='flex flex-col  gap-3 p-5 w-96 rounded-xl' style={{boxShadow:"rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"}}>
                     <div className='flex flex-row justify-between gap-5 pt-7'>
